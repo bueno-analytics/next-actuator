@@ -7,7 +7,7 @@
 
     /* Build */
     "rootDir": "./src",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "declaration": true,
 
     /* Checks */

@@ -12,7 +12,7 @@
     "prepublish": "yarn build"
   },
   "files": [
-    "./lib"
+    "dist"
   ],
   "bugs": {
     "url": "https://github.com/bueno-systems/next-actuator/issues"
