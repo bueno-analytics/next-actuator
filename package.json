@@ -1,6 +1,6 @@
 {
   "name": "@bueno-systems/next-actuator",
-  "version": "0.1.0",
+  "version": "0.0.0-semantic-release",
   "description": "Provide Next.js routes for monitoring and management of your application in Production.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -26,6 +26,9 @@
       "main",
       "next"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "homepage": "https://github.com/bueno-systems/next-actuator#readme",
   "devDependencies": {
