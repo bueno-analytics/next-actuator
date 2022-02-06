@@ -4,13 +4,30 @@
   "description": "Provide Next.js routes for monitoring and management of your application in Production.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "repository": "https://github.com/bueno-systems/next-actuator.git",
   "author": "Jack Cuthbert <jckcthbrt@gmail.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "prepublish": "yarn build"
   },
+  "files": [
+    "./lib"
+  ],
+  "bugs": {
+    "url": "https://github.com/bueno-systems/next-actuator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bueno-systems/next-actuator.git"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "next"
+    ]
+  },
+  "homepage": "https://github.com/bueno-systems/next-actuator#readme",
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
