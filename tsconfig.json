@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    /* ESM */
+    "moduleResolution": "node",
+    "target": "ES2017",
+    "module": "es2015",
+
+    /* Build */
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "declaration": true,
+
+    /* Checks */
+    "strict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true
+  }
+}
