@@ -19,7 +19,7 @@ Inspired by [rcruzper / express-actuator](https://github.com/rcruzper/express-ac
 ```shell
 npm install --save @bueno-systems/next-actuator
 # or
-yarn add  @bueno-systems/next-actuator
+yarn add @bueno-systems/next-actuator
 ```
 
 💡 TypeScript types are included
@@ -50,7 +50,7 @@ nextActuator({
 })
 ```
 
-## Endpoints exmples
+## Endpoints examples
 
 `GET http://localhost:3000/api/actuator/health`
 
