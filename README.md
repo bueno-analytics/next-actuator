@@ -1,5 +1,7 @@
 # next-actuator
 
+[![Npm package version](https://img.shields.io/npm/v/@bueno-systems/next-actuator)](https://www.npmjs.com/package/@bueno-systems/next-actuator) [![Release workflow](https://img.shields.io/github/workflow/status/bueno-systems/next-actuator/Build/main)](https://github.com/bueno-systems/next-actuator/actions/workflows/release.yml)
+
 Provide Next.js routes for monitoring and management of your application in Production.
 
 Inspired by [rcruzper / express-actuator](https://github.com/rcruzper/express-actuator) but tailored for Next.js applications.
