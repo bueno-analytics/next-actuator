@@ -3,6 +3,7 @@
   "version": "0.0.0-semantic-release",
   "description": "Provide Next.js routes for monitoring and management of your application in Production.",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Jack Cuthbert <jckcthbrt@gmail.com>",
   "license": "MIT",

@@ -2,8 +2,8 @@
   "compilerOptions": {
     /* ESM */
     "moduleResolution": "node",
-    "target": "ES2017",
-    "module": "es2015",
+    "target": "es2019",
+    "module": "CommonJS",
 
     /* Build */
     "rootDir": "./src",
