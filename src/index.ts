@@ -21,7 +21,7 @@ export function nextActuator(config: Partial<Config> = {}): NextApiHandler {
   } = config
 
   return async (req, res) => {
-    if (req.url == null) {
+    if (req.url == null || req.url === '') {
       res.status(404).end()
       return
     }
