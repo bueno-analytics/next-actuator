@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsc -b",
     "prepublish": "yarn build",
-    "lint": "eslint --ext .js,.ts,.tsx ."
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "test": "jest"
   },
   "files": [
     "dist"
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
+    "@types/jest": "^27.4.0",
     "@types/node": "^17.0.15",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "eslint": "^7.12.1",
@@ -57,9 +59,12 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.0.0",
     "husky": "^7.0.4",
+    "jest": "^27.5.0",
     "next": "^12.0.10",
+    "node-mocks-http": "^1.11.0",
     "prettier": "^2.5.1",
     "semantic-release": "^19.0.2",
+    "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
   },
   "peerDependencies": {
