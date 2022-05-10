@@ -21,6 +21,10 @@ export function nextActuator(config: Partial<Config> = {}): NextApiHandler {
   } = config
 
   return async (req, res) => {
+    if (req.method?.toUpperCase() !== 'GET') {
+      return res.status(404).end()
+    }
+
     if (req.url == null || req.url === '') {
       res.status(404).end()
       return

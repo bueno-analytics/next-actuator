@@ -72,6 +72,21 @@ describe('nextActuator', () => {
     })
   })
 
+  describe('http methods', () => {
+    const actuator = nextActuator()
+
+    test('returns 404 when method other than GET is used', async () => {
+      const { req, res } = httpMocks.createMocks({
+        method: 'POST',
+        url: '/actuator/health'
+      })
+
+      await actuator(req, res)
+
+      expect(res._getStatusCode()).toBe(404)
+    })
+  })
+
   describe('config', () => {
     it('returns 404 with endpoints disabled', async () => {
       const actuator = nextActuator({
