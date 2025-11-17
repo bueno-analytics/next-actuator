@@ -1,5 +1,5 @@
 {
-  "name": "@bueno-systems/next-actuator",
+  "name": "@bueno-analytics/next-actuator",
   "version": "0.0.0-semantic-release",
   "description": "Provide Next.js routes for monitoring and management of your application in Production.",
   "main": "dist/index.js",
@@ -31,11 +31,11 @@
     "kubernetes"
   ],
   "bugs": {
-    "url": "https://github.com/bueno-systems/next-actuator/issues"
+    "url": "https://github.com/bueno-analytics/next-actuator/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bueno-systems/next-actuator.git"
+    "url": "git+https://github.com/bueno-analytics/next-actuator.git"
   },
   "release": {
     "branches": ["main", "next"]
@@ -43,7 +43,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/bueno-systems/next-actuator#readme",
+  "homepage": "https://github.com/bueno-analytics/next-actuator#readme",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@commitlint/cli": "^20.1.0",
