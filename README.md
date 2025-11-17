@@ -1,6 +1,6 @@
 # next-actuator
 
-[![Npm package version](https://img.shields.io/npm/v/@bueno-systems/next-actuator)](https://www.npmjs.com/package/@bueno-systems/next-actuator) [![Release workflow](https://img.shields.io/github/workflow/status/bueno-systems/next-actuator/Build/main)](https://github.com/bueno-systems/next-actuator/actions/workflows/release.yml)
+[![Npm package version](https://img.shields.io/npm/v/@bueno-analytics/next-actuator)](https://www.npmjs.com/package/@bueno-analytics/next-actuator) [![Release workflow](https://img.shields.io/github/workflow/status/bueno-analytics/next-actuator/Build/main)](https://github.com/bueno-analytics/next-actuator/actions/workflows/release.yml)
 
 Provide Next.js routes for monitoring and management of your application in Production.
 
@@ -17,9 +17,9 @@ Inspired by [rcruzper / express-actuator](https://github.com/rcruzper/express-ac
 ## Installation
 
 ```shell
-npm install --save @bueno-systems/next-actuator
+npm install --save @bueno-analytics/next-actuator
 # or
-yarn add @bueno-systems/next-actuator
+yarn add @bueno-analytics/next-actuator
 ```
 
 💡 TypeScript types are included
@@ -31,7 +31,7 @@ return a call to `nextActuator()`. Named or default exports are available.
 
 ```ts
 // ./pages/api/actuator/[...actuator].ts
-import { nextActuator } from '@bueno-systems/next-actuator'
+import { nextActuator } from '@bueno-analytics/next-actuator'
 
 // Export the handler function with some options
 export default nextActuator()
