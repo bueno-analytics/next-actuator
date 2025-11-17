@@ -13,6 +13,11 @@
     /* Checks */
     "strict": true,
     "strictNullChecks": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+
+    /* Test types */
+    "types": ["vitest/globals"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

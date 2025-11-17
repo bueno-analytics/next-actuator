@@ -1,4 +1,5 @@
-import * as httpMocks from 'node-mocks-http'
+import { testApiHandler } from 'next-test-api-route-handler'
+import { describe, expect, it, test } from 'vitest'
 import nextActuator from '.'
 
 describe('nextActuator', () => {
@@ -6,24 +7,24 @@ describe('nextActuator', () => {
     const actuator = nextActuator()
 
     it('returns 404 for no endpoint matched', async () => {
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/nope'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/nope',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(404)
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(404)
     })
 
     it('returns 404 if no url is available', async () => {
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET'
+      await testApiHandler({
+        pagesHandler: actuator,
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(404)
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(404)
     })
   })
 
@@ -31,44 +32,43 @@ describe('nextActuator', () => {
     const actuator = nextActuator()
 
     test('/health', async () => {
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/health'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/health',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(200)
+          const data = await res.json()
+          expect(data).toEqual({ status: 'UP' })
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(200)
-      expect(res._getData()).toEqual({ status: 'UP' })
     })
 
     test('/info', async () => {
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/info'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/info',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(200)
+          const data = await res.json()
+          expect(data.build).not.toBeUndefined()
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(200)
-
-      const data = res._getData()
-      expect(data.build).not.toBeUndefined()
     })
 
     test('/metrics', async () => {
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/metrics'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/metrics',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(200)
+          const data = await res.json()
+          expect(data.mem).not.toBeUndefined()
+          expect(data.uptime).not.toBeUndefined()
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(200)
-
-      const data = res._getData()
-      expect(data.mem).not.toBeUndefined()
-      expect(data.uptime).not.toBeUndefined()
     })
   })
 
@@ -76,14 +76,14 @@ describe('nextActuator', () => {
     const actuator = nextActuator()
 
     test('returns 404 when method other than GET is used', async () => {
-      const { req, res } = httpMocks.createMocks({
-        method: 'POST',
-        url: '/actuator/health'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/health',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'POST' })
+          expect(res.status).toBe(404)
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(404)
     })
   })
 
@@ -92,42 +92,42 @@ describe('nextActuator', () => {
       const actuator = nextActuator({
         enableHealth: false
       })
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/health'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/health',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(404)
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(404)
     })
 
     it('returns 200 when a custom endpoint is set', async () => {
       const actuator = nextActuator({
         healthEndpoint: '/health-endpoint'
       })
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/health-endpoint'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/health-endpoint',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(200)
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(200)
     })
 
     it('returns 404 when a custom endpoint is set', async () => {
       const actuator = nextActuator({
         healthEndpoint: '/health-endpoint'
       })
-      const { req, res } = httpMocks.createMocks({
-        method: 'GET',
-        url: '/actuator/health'
+      await testApiHandler({
+        pagesHandler: actuator,
+        url: '/actuator/health',
+        test: async ({ fetch }) => {
+          const res = await fetch({ method: 'GET' })
+          expect(res.status).toBe(404)
+        }
       })
-
-      await actuator(req, res)
-
-      expect(res._getStatusCode()).toBe(404)
     })
   })
 })
