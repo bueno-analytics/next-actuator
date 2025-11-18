@@ -1,10 +1,19 @@
 # next-actuator
 
-[![Npm package version](https://img.shields.io/npm/v/@bueno-analytics/next-actuator)](https://www.npmjs.com/package/@bueno-analytics/next-actuator) [![Release workflow](https://img.shields.io/github/workflow/status/bueno-analytics/next-actuator/Build/main)](https://github.com/bueno-analytics/next-actuator/actions/workflows/release.yml)
+[![Npm package version](https://img.shields.io/npm/v/@bueno-analytics/next-actuator)](https://www.npmjs.com/package/@bueno-analytics/next-actuator) [![Release workflow](https://img.shields.io/github/actions/workflow/status/bueno-analytics/next-actuator/release.yml?branch=main)](https://github.com/bueno-analytics/next-actuator/actions/workflows/release.yml)
 
 Provide Next.js routes for monitoring and management of your application in Production.
 
 Inspired by [rcruzper / express-actuator](https://github.com/rcruzper/express-actuator) but tailored for Next.js applications.
+
+> This package used to be `@bueno-systems/next-actuator`. The v2 release is the same code but under a different organisation scope. Update with:
+> ```
+> npm uninstall @bueno-systems/next-actuator
+> npm install --save @bueno-analytics/next-actuator
+> # or
+> yarn remove @bueno-systems/next-actuator
+> yarn add @bueno-analytics/next-actuator
+> ```
 
 ## Endpoints
 
