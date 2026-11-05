@@ -1,13 +1,14 @@
-import type { NextApiHandler } from 'next'
-import { getPackageJson } from './lib/get-package-json'
+import type { NextApiHandler } from "next";
+
+import { getPackageJson } from "./lib/get-package-json";
 
 interface Config {
-  enableHealth: boolean
-  enableMetrics: boolean
-  enableInfo: boolean
-  healthEndpoint: string
-  metricsEndpoint: string
-  infoEndpoint: string
+  enableHealth: boolean;
+  enableMetrics: boolean;
+  enableInfo: boolean;
+  healthEndpoint: string;
+  metricsEndpoint: string;
+  infoEndpoint: string;
 }
 
 export function nextActuator(config: Partial<Config> = {}): NextApiHandler {
@@ -15,45 +16,45 @@ export function nextActuator(config: Partial<Config> = {}): NextApiHandler {
     enableHealth = true,
     enableMetrics = true,
     enableInfo = true,
-    healthEndpoint = '/health',
-    metricsEndpoint = '/metrics',
-    infoEndpoint = '/info'
-  } = config
+    healthEndpoint = "/health",
+    metricsEndpoint = "/metrics",
+    infoEndpoint = "/info",
+  } = config;
 
   return async (req, res) => {
-    if (req.method?.toUpperCase() !== 'GET') {
-      res.status(404).end()
-      return
+    if (req.method?.toUpperCase() !== "GET") {
+      res.status(404).end();
+      return;
     }
 
-    if (req.url == null || req.url === '') {
-      res.status(404).end()
-      return
+    if (req.url == null || req.url === "") {
+      res.status(404).end();
+      return;
     }
 
     if (enableHealth && req.url.endsWith(healthEndpoint)) {
-      res.status(200).send({ status: 'UP' })
-      return
+      res.status(200).send({ status: "UP" });
+      return;
     }
 
     if (enableInfo && req.url.endsWith(infoEndpoint)) {
       res.status(200).send({
-        build: await getPackageJson()
+        build: await getPackageJson(),
         // git: {}
-      })
-      return
+      });
+      return;
     }
 
     if (enableMetrics && req.url.endsWith(metricsEndpoint)) {
       res.status(200).send({
         mem: process.memoryUsage(),
-        uptime: process.uptime()
-      })
-      return
+        uptime: process.uptime(),
+      });
+      return;
     }
 
-    res.status(404).end()
-  }
+    res.status(404).end();
+  };
 }
 
-export default nextActuator
+export default nextActuator;

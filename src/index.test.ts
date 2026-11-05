@@ -1,137 +1,138 @@
-import { testApiHandler } from 'next-test-api-route-handler'
-import { describe, expect, it, test } from 'vitest'
-import defaultExport, { nextActuator } from '.'
+import { testApiHandler } from "next-test-api-route-handler";
+import { describe, expect, it, test } from "vitest";
 
-describe('nextActuator', () => {
-  it('is also the default export', () => {
-    expect(defaultExport).toBe(nextActuator)
-  })
+import defaultExport, { nextActuator } from ".";
 
-  describe('404', () => {
-    const actuator = nextActuator()
+describe("nextActuator", () => {
+  it("is also the default export", () => {
+    expect(defaultExport).toBe(nextActuator);
+  });
 
-    it('returns 404 for no endpoint matched', async () => {
+  describe("404", () => {
+    const actuator = nextActuator();
+
+    it("returns 404 for no endpoint matched", async () => {
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/nope',
+        url: "/actuator/nope",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(404)
-        }
-      })
-    })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(404);
+        },
+      });
+    });
 
-    it('returns 404 if no url is available', async () => {
+    it("returns 404 if no url is available", async () => {
       await testApiHandler({
         pagesHandler: actuator,
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(404)
-        }
-      })
-    })
-  })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(404);
+        },
+      });
+    });
+  });
 
-  describe('200', () => {
-    const actuator = nextActuator()
+  describe("200", () => {
+    const actuator = nextActuator();
 
-    test('/health', async () => {
+    test("/health", async () => {
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/health',
+        url: "/actuator/health",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(200)
-          const data = await res.json()
-          expect(data).toEqual({ status: 'UP' })
-        }
-      })
-    })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(200);
+          const data = await res.json();
+          expect(data).toEqual({ status: "UP" });
+        },
+      });
+    });
 
-    test('/info', async () => {
+    test("/info", async () => {
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/info',
+        url: "/actuator/info",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(200)
-          const data = await res.json()
-          expect(data.build).not.toBeUndefined()
-        }
-      })
-    })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(200);
+          const data = await res.json();
+          expect(data.build).not.toBeUndefined();
+        },
+      });
+    });
 
-    test('/metrics', async () => {
+    test("/metrics", async () => {
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/metrics',
+        url: "/actuator/metrics",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(200)
-          const data = await res.json()
-          expect(data.mem).not.toBeUndefined()
-          expect(data.uptime).not.toBeUndefined()
-        }
-      })
-    })
-  })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(200);
+          const data = await res.json();
+          expect(data.mem).not.toBeUndefined();
+          expect(data.uptime).not.toBeUndefined();
+        },
+      });
+    });
+  });
 
-  describe('http methods', () => {
-    const actuator = nextActuator()
+  describe("http methods", () => {
+    const actuator = nextActuator();
 
-    test('returns 404 when method other than GET is used', async () => {
+    test("returns 404 when method other than GET is used", async () => {
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/health',
+        url: "/actuator/health",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'POST' })
-          expect(res.status).toBe(404)
-        }
-      })
-    })
-  })
+          const res = await fetch({ method: "POST" });
+          expect(res.status).toBe(404);
+        },
+      });
+    });
+  });
 
-  describe('config', () => {
-    it('returns 404 with endpoints disabled', async () => {
+  describe("config", () => {
+    it("returns 404 with endpoints disabled", async () => {
       const actuator = nextActuator({
-        enableHealth: false
-      })
+        enableHealth: false,
+      });
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/health',
+        url: "/actuator/health",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(404)
-        }
-      })
-    })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(404);
+        },
+      });
+    });
 
-    it('returns 200 when a custom endpoint is set', async () => {
+    it("returns 200 when a custom endpoint is set", async () => {
       const actuator = nextActuator({
-        healthEndpoint: '/health-endpoint'
-      })
+        healthEndpoint: "/health-endpoint",
+      });
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/health-endpoint',
+        url: "/actuator/health-endpoint",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(200)
-        }
-      })
-    })
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(200);
+        },
+      });
+    });
 
-    it('returns 404 when a custom endpoint is set', async () => {
+    it("returns 404 when a custom endpoint is set", async () => {
       const actuator = nextActuator({
-        healthEndpoint: '/health-endpoint'
-      })
+        healthEndpoint: "/health-endpoint",
+      });
       await testApiHandler({
         pagesHandler: actuator,
-        url: '/actuator/health',
+        url: "/actuator/health",
         test: async ({ fetch }) => {
-          const res = await fetch({ method: 'GET' })
-          expect(res.status).toBe(404)
-        }
-      })
-    })
-  })
-})
+          const res = await fetch({ method: "GET" });
+          expect(res.status).toBe(404);
+        },
+      });
+    });
+  });
+});

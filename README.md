@@ -7,6 +7,7 @@ Provide Next.js routes for monitoring and management of your application in Prod
 Inspired by [rcruzper / express-actuator](https://github.com/rcruzper/express-actuator) but tailored for Next.js applications.
 
 > This package used to be `@bueno-systems/next-actuator`. The v2 release is the same code but under a different organisation scope. Update with:
+>
 > ```
 > npm uninstall @bueno-systems/next-actuator
 > npm install --save @bueno-analytics/next-actuator
@@ -40,10 +41,10 @@ return a call to `nextActuator()`. Named or default exports are available.
 
 ```ts
 // ./pages/api/actuator/[...actuator].ts
-import { nextActuator } from '@bueno-analytics/next-actuator'
+import { nextActuator } from "@bueno-analytics/next-actuator";
 
 // Export the handler function with some options
-export default nextActuator()
+export default nextActuator();
 ```
 
 ## Configuration
@@ -53,10 +54,10 @@ nextActuator({
   enableHealth: true, // enable/disable /health endpoint (default true)
   enableMetrics: true, // enable/disable /metrics endpoint (default true)
   enableInfo: true, // enable/disable /info endpoint (default true)
-  healthEndpoint: '/health', // change the /health endpoint to something else
-  metricsEndpoint: '/metrics', // change the /metrics endpoint to something else
-  infoEndpoint: '/info' // change the /info endpoint to something else
-})
+  healthEndpoint: "/health", // change the /health endpoint to something else
+  metricsEndpoint: "/metrics", // change the /metrics endpoint to something else
+  infoEndpoint: "/info", // change the /info endpoint to something else
+});
 ```
 
 ## Endpoints examples
