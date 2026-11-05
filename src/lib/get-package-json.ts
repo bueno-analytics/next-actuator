@@ -1,26 +1,26 @@
-import * as fs from 'node:fs/promises'
+import * as fs from "node:fs/promises";
 
 interface PackageMetrics {
-  name: string
-  description: string
-  version: string
+  name: string;
+  description: string;
+  version: string;
 }
 
-let cache: PackageMetrics | null = null
+let cache: PackageMetrics | null = null;
 
 export async function getPackageJson(): Promise<PackageMetrics> {
-  if (cache !== null) return cache
+  if (cache !== null) return cache;
 
-  const packageJson = await fs.readFile('./package.json', 'utf-8')
-  const parsed = JSON.parse(packageJson)
+  const packageJson = await fs.readFile("./package.json", "utf-8");
+  const parsed = JSON.parse(packageJson);
 
   const result: PackageMetrics = {
     name: parsed.name,
     description: parsed.description,
-    version: parsed.version
-  }
+    version: parsed.version,
+  };
 
-  cache = result
+  cache = result;
 
-  return result
+  return result;
 }
