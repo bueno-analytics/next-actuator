@@ -7,59 +7,37 @@ on:
   push:
 
 jobs:
-  Build:
-    name: Build
+  # One job, so these pay for one machine and one install. Each step runs even
+  # when an earlier one fails, so a run reports every failure
+  Check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
-      - name: Install dependencies
-        run: yarn
+          node-version-file: .nvmrc
+          cache: yarn
+      - id: install
+        run: yarn install --immutable
+      - name: Format
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: yarn format:check
+      - name: Lint
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: yarn lint
+      - name: Typecheck
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: yarn typecheck
+      - name: Test
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: yarn test
       - name: Build
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: yarn build
 
-  Lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
-      - name: Install dependencies
-        run: yarn
-      - name: Lint
-        run: yarn lint
-
-  Test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
-      - name: Install dependencies
-        run: yarn
-      - name: Test
-        run: yarn test
-
   Release:
-    needs: [Build, Test, Lint]
+    needs: [Check]
     if: github.ref == 'refs/heads/main'
     name: Release
     runs-on: ubuntu-latest
@@ -69,20 +47,18 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: "lts/*"
-      - name: Install dependencies
-        run: yarn install
+          node-version-file: .nvmrc
+          cache: yarn
+      - run: yarn install --immutable
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+        run: yarn semantic-release
