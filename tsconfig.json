@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    /* ESM */
-    "moduleResolution": "node",
+    /* Emits CommonJS, as package.json has no "type": "module" */
+    "module": "nodenext",
     "target": "es2019",
-    "module": "CommonJS",
 
     /* Build */
     "rootDir": "./src",
@@ -16,7 +15,7 @@
     "skipLibCheck": true,
 
     /* Test types */
-    "types": ["vitest/globals"]
+    "types": ["node", "vitest/globals"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

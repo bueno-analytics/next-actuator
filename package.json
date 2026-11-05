@@ -2,65 +2,74 @@
   "name": "@bueno-analytics/next-actuator",
   "version": "2.0.0",
   "description": "Provide Next.js routes for monitoring and management of your application in Production.",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "author": "Jack Cuthbert <jckcthbrt@gmail.com>",
-  "license": "MIT",
-  "private": false,
-  "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "prepack": "yarn build",
-    "typecheck": "tsc --noEmit",
-    "lint": "biome check .",
-    "lint:fix": "biome check --write .",
-    "format": "biome format --write .",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "files": ["dist"],
-  "engines": {
-    "node": ">=16.0.0"
-  },
   "keywords": [
     "actuator",
-    "next.js",
     "health-check",
-    "ping",
+    "kubernetes",
     "metrics",
-    "kubernetes"
+    "next.js",
+    "ping"
   ],
+  "homepage": "https://github.com/bueno-analytics/next-actuator#readme",
   "bugs": {
     "url": "https://github.com/bueno-analytics/next-actuator/issues"
   },
+  "license": "MIT",
+  "author": "Jack Cuthbert <jckcthbrt@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bueno-analytics/next-actuator.git"
   },
-  "release": {
-    "branches": ["main", "next"]
-  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/bueno-analytics/next-actuator#readme",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "yarn build",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@types/node": "^22.10.1",
-    "@types/react": "^19.0.1",
-    "@vitest/ui": "^2.1.8",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@vitest/ui": "^5.1.0",
     "husky": "^9.1.7",
-    "next": "^16.1.5",
-    "next-test-api-route-handler": "^4.0.10",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "semantic-release": "^25.0.2",
-    "typescript": "^4.8.3",
-    "vitest": "^2.1.8"
+    "next": "^16.4.4",
+    "next-test-api-route-handler": "^5.0.7",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "semantic-release": "^25.0.9",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
   },
   "peerDependencies": {
     "next": "^12 || ^13 || ^14 || ^15 || ^16"
-  }
+  },
+  "release": {
+    "branches": [
+      "main",
+      "next"
+    ]
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "packageManager": "yarn@4.18.0"
 }

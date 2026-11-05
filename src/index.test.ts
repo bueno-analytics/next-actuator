@@ -1,8 +1,12 @@
 import { testApiHandler } from 'next-test-api-route-handler'
 import { describe, expect, it, test } from 'vitest'
-import nextActuator from '.'
+import defaultExport, { nextActuator } from '.'
 
 describe('nextActuator', () => {
+  it('is also the default export', () => {
+    expect(defaultExport).toBe(nextActuator)
+  })
+
   describe('404', () => {
     const actuator = nextActuator()
 
